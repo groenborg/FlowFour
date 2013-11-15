@@ -4,9 +4,14 @@
  */
 package flowfour;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Graphics extends javax.swing.JFrame {
 
     private WordPairControlIF wpc;
+    private final String REGEX_NUMERIC = "-?\\d+";
+    private final String REGEX_SIGNS = "\\W+";
 
     public Graphics(WordPairControlIF wpc) {
         this.wpc = wpc;
@@ -162,16 +167,23 @@ public class Graphics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessButtonActionPerformed
-       helpLabel.setText(questionTextField.getText()+"hej lort");
+        if(checkInput(questionTextField.getText())){
+            helpLabel.setText("New Question");
+        }else{
+            helpLabel.setText("Enter a valid question");
+        }
+       
+       
        
 
     }//GEN-LAST:event_guessButtonActionPerformed
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-       
-        
+      String question = wpc.getRandomQuestion();
+      questionTextField.setText(question);
+      
     }//GEN-LAST:event_nextButtonActionPerformed
     private void questionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionTextFieldActionPerformed
-        
+       
         
     }//GEN-LAST:event_questionTextFieldActionPerformed
     private void answerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerTextFieldActionPerformed
@@ -179,6 +191,10 @@ public class Graphics extends javax.swing.JFrame {
         
     }//GEN-LAST:event_answerTextFieldActionPerformed
     private void lookUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookUpButtonActionPerformed
+        String tmp;
+        if(checkInput(tmp = questionTextField.getText())){
+            wpc.lookup(tmp);
+        }
         
         
     }//GEN-LAST:event_lookUpButtonActionPerformed
@@ -199,6 +215,31 @@ public class Graphics extends javax.swing.JFrame {
         helpLabel.setText(tmp2);
     }//GEN-LAST:event_questionTextFieldKeyPressed
 
+    
+    private boolean checkInput(String text){
+        text = text.trim();
+        Pattern num = Pattern.compile(this.REGEX_NUMERIC);
+        Pattern sign = Pattern.compile(this.REGEX_SIGNS);
+        Matcher mnum = num.matcher(text);
+        Matcher msign = sign.matcher(text);
+        
+        while (mnum.find()) {
+            if(mnum.group().length() != 0){
+                return false;
+            }
+        }
+        while (msign.find()) {
+            if(msign.group().length() != 0){
+                return false;
+            }
+        }
+        if(text.length() <= 0){
+            return false;
+        }
+    return true;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField answerTextField;
     private javax.swing.JButton guessButton;

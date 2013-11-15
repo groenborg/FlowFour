@@ -28,6 +28,10 @@ public class Control implements WordPairControlIF {
         sb.append(difficulty);
         wordPairs.add(sb.toString());
         
+        
+       
+        
+        
         translator = new Translator();
         try{
             translator.readOutLoud(answer);
