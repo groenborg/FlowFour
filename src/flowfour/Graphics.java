@@ -167,20 +167,13 @@ public class Graphics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessButtonActionPerformed
-        if(checkInput(questionTextField.getText())){
-            helpLabel.setText("New Question");
-        }else{
-            helpLabel.setText("Enter a valid question");
-        }
-       
+        
        
        
 
     }//GEN-LAST:event_guessButtonActionPerformed
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-      String question = wpc.getRandomQuestion();
-      questionTextField.setText(question);
-      
+      questionTextField.setText(wpc.getRandomQuestion());
     }//GEN-LAST:event_nextButtonActionPerformed
     private void questionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionTextFieldActionPerformed
        
@@ -199,9 +192,11 @@ public class Graphics extends javax.swing.JFrame {
         
     }//GEN-LAST:event_lookUpButtonActionPerformed
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        wpc.add(questionTextField.getText(), answerTextField.getText());
-        helpLabel.setText("question succesfully added");
-        
+        if(checkInput(answerTextField.getText()) && checkInput(questionTextField.getText())){
+            wpc.add(questionTextField.getText(), answerTextField.getText());
+        }else{
+            helpLabel.setText("no numbers or charecters accepted");
+        } 
     }//GEN-LAST:event_newButtonActionPerformed
     private void voiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voiceButtonActionPerformed
         
@@ -222,7 +217,6 @@ public class Graphics extends javax.swing.JFrame {
         Pattern sign = Pattern.compile(this.REGEX_SIGNS);
         Matcher mnum = num.matcher(text);
         Matcher msign = sign.matcher(text);
-        
         while (mnum.find()) {
             if(mnum.group().length() != 0){
                 return false;
