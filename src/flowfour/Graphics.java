@@ -153,9 +153,10 @@ public class Graphics extends javax.swing.JFrame {
 
     private void guessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessButtonActionPerformed
        if(wpc.checkGuess(answerTextField.getText(), questionTextField.getText())){
-          
+           helpLabel.setText("You guessed the word");
        }else{
-           
+           String tmp = wpc.lookup(questionTextField.getText());
+           helpLabel.setText("Wrong answer. The first letter of the word is " + tmp.substring(0, 1));   
        }
     }//GEN-LAST:event_guessButtonActionPerformed
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
@@ -166,13 +167,19 @@ public class Graphics extends javax.swing.JFrame {
         if(inputCheck(tmp)){
             wpc.lookup(tmp);
         }else{
-            helpLabel.setText("Invalid text");
+            helpLabel.setText("Error");
         }
     }//GEN-LAST:event_lookUpButtonActionPerformed
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        if(inputCheck(answerTextField.getText()) && inputCheck(questionTextField.getText())){
-            //wpc.add(questionTextField.getText(), answerTextField.getText());
-            helpLabel.setText("check workd");
+        String a = answerTextField.getText();
+        String q = questionTextField.getText();
+        if(inputCheck(a) && inputCheck(q)){
+            if(!q.equalsIgnoreCase(a)){
+                helpLabel.setText("check worked");
+                wpc.add(questionTextField.getText(), answerTextField.getText());
+            }else{
+            helpLabel.setText("words must differ");
+            }
         }else{
             helpLabel.setText("no numbers or charecters accepted");
         } 
@@ -195,7 +202,6 @@ public class Graphics extends javax.swing.JFrame {
         Matcher msign = sign.matcher(text);
         while (mnum.find()) {
             if(mnum.group().length() != 0){
-                
                 return false;
             }
         }
