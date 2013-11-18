@@ -35,24 +35,27 @@
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="questionTextField" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="newButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="voiceButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="questionTextField" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                          <Component id="answerTextField" min="-2" pref="157" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="answerTextField" min="-2" pref="157" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="newButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="nextButton" max="32767" attributes="0"/>
                   <Component id="lookUpButton" max="32767" attributes="0"/>
                   <Component id="guessButton" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -84,7 +87,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lookUpButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="voiceButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="helpLabel" pref="30" max="32767" attributes="0"/>
@@ -105,15 +108,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="questionTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="questionTextFieldActionPerformed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="questionTextFieldKeyPressed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="answerTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="answerTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -165,12 +161,12 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="voiceButton">
+    <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Voice"/>
+        <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voiceButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

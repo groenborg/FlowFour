@@ -38,30 +38,13 @@ public class Graphics extends javax.swing.JFrame {
         lookUpButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         helpLabel = new javax.swing.JLabel();
-        voiceButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Question");
 
         jLabel2.setText("Answer");
-
-        questionTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                questionTextFieldActionPerformed(evt);
-            }
-        });
-        questionTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                questionTextFieldKeyPressed(evt);
-            }
-        });
-
-        answerTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                answerTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         jLabel3.setText("Language Trainer");
@@ -97,10 +80,10 @@ public class Graphics extends javax.swing.JFrame {
         helpLabel.setText("Hurray");
         helpLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        voiceButton.setText("Voice");
-        voiceButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voiceButtonActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -118,20 +101,22 @@ public class Graphics extends javax.swing.JFrame {
                     .add(jLabel1)
                     .add(jLabel2))
                 .add(31, 31, 31)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(questionTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(layout.createSequentialGroup()
-                            .add(newButton)
-                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(voiceButton))
-                        .add(answerTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(33, 33, 33)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(questionTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(answerTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(33, 33, 33))
+                    .add(layout.createSequentialGroup()
+                        .add(newButton)
+                        .add(21, 21, 21)
+                        .add(deleteButton)
+                        .add(18, 18, 18)))
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(nextButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(lookUpButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(guessButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jLabel3)
@@ -157,7 +142,7 @@ public class Graphics extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(lookUpButton)
                     .add(newButton)
-                    .add(voiceButton))
+                    .add(deleteButton))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(helpLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                 .addContainerGap())
@@ -167,51 +152,42 @@ public class Graphics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessButtonActionPerformed
-        
-       
-       
-
+       if(wpc.checkGuess(answerTextField.getText(), questionTextField.getText())){
+          
+       }else{
+           
+       }
     }//GEN-LAST:event_guessButtonActionPerformed
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
       questionTextField.setText(wpc.getRandomQuestion());
     }//GEN-LAST:event_nextButtonActionPerformed
-    private void questionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionTextFieldActionPerformed
-       
-        
-    }//GEN-LAST:event_questionTextFieldActionPerformed
-    private void answerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerTextFieldActionPerformed
-        
-        
-    }//GEN-LAST:event_answerTextFieldActionPerformed
     private void lookUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookUpButtonActionPerformed
-        String tmp;
-        if(checkInput(tmp = questionTextField.getText())){
+        String tmp = questionTextField.getText();
+        if(inputCheck(tmp)){
             wpc.lookup(tmp);
+        }else{
+            helpLabel.setText("Invalid text");
         }
-        
-        
     }//GEN-LAST:event_lookUpButtonActionPerformed
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        if(checkInput(answerTextField.getText()) && checkInput(questionTextField.getText())){
-            wpc.add(questionTextField.getText(), answerTextField.getText());
+        if(inputCheck(answerTextField.getText()) && inputCheck(questionTextField.getText())){
+            //wpc.add(questionTextField.getText(), answerTextField.getText());
+            helpLabel.setText("check workd");
         }else{
             helpLabel.setText("no numbers or charecters accepted");
         } 
     }//GEN-LAST:event_newButtonActionPerformed
-    private void voiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voiceButtonActionPerformed
-        
-        
-    }//GEN-LAST:event_voiceButtonActionPerformed
-    private void questionTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_questionTextFieldKeyPressed
-        
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         String tmp = questionTextField.getText();
-        helpLabel.setText(tmp);
-        String tmp2 = questionTextField.getText();
-        helpLabel.setText(tmp2);
-    }//GEN-LAST:event_questionTextFieldKeyPressed
+        if(inputCheck(tmp)){
+            wpc.delete(tmp);
+            helpLabel.setText("Word " + tmp+" deleted");
+        }else{
+            helpLabel.setText("Wordpair do not exist!");
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
-    
-    private boolean checkInput(String text){
+    private boolean inputCheck(String text){
         text = text.trim();
         Pattern num = Pattern.compile(this.REGEX_NUMERIC);
         Pattern sign = Pattern.compile(this.REGEX_SIGNS);
@@ -219,6 +195,7 @@ public class Graphics extends javax.swing.JFrame {
         Matcher msign = sign.matcher(text);
         while (mnum.find()) {
             if(mnum.group().length() != 0){
+                
                 return false;
             }
         }
@@ -236,6 +213,7 @@ public class Graphics extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField answerTextField;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton guessButton;
     private javax.swing.JLabel helpLabel;
     private javax.swing.JLabel jLabel1;
@@ -245,6 +223,5 @@ public class Graphics extends javax.swing.JFrame {
     private javax.swing.JButton newButton;
     private javax.swing.JButton nextButton;
     private javax.swing.JTextField questionTextField;
-    private javax.swing.JButton voiceButton;
     // End of variables declaration//GEN-END:variables
 }
