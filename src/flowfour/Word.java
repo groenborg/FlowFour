@@ -15,10 +15,10 @@ public class Word {
     private String english;
     private int rating;
     
-    public Word(String englishWord, String danishWord){
+    public Word(String englishWord, String danishWord, int rating){
         this.danish = danishWord;
         this.english = englishWord;
-        genDifficulty();
+        this.rating = rating;
     }
     
     public String getDanish(){

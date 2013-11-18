@@ -51,6 +51,11 @@ public class Control implements WordPairControlIF {
 
     @Override
     public boolean checkGuess(String question, String quess) {
+        
+        
+        
+        
+        
         return true;
         
         
