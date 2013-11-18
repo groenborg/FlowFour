@@ -15,7 +15,7 @@ public class Word {
     private String english;
     private int rating;
     
-    public Word(String danishWord, String englishWord){
+    public Word(String englishWord, String danishWord){
         this.danish = danishWord;
         this.english = englishWord;
         genDifficulty();
