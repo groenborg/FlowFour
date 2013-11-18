@@ -84,27 +84,21 @@ public class Formatter
 
         return true;
     }
-//    public boolean delete()
-//    {
-//        try
-//        {
-//            if (file.delete())
-//            {
-//                System.out.println(fileName + "is deleted");
-//            } else
-//            {
-//                System.out.println("Unable to delete" + fileName);
-//                return false;
-//            }
-//
-//        } catch (Exception e)
-//        {
-//
-//            e.printStackTrace();
-//
-//        }
-//        return true;
-//    }
+
+    public boolean delete(String question)
+    {
+        try
+        {
+            wordPairs.remove(question);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("");
+            return false;
+        }
+      return true;
+    }
+
     public void clear()
     {
         wordPairs.clear();
