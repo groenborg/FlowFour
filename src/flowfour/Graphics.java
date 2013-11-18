@@ -15,6 +15,7 @@ public class Graphics extends javax.swing.JFrame {
 
     public Graphics(WordPairControlIF wpc) {
         this.wpc = wpc;
+        wpc.load();
         initComponents();
     }
 
