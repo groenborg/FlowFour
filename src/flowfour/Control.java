@@ -3,6 +3,7 @@ package flowfour;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -80,24 +81,24 @@ public class Control implements WordPairControlIF {
         Scanner s;
         try{
         s = new Scanner(new File("dictionary.txt"));
-        
-        
-        
-        }catch(Exception e){
-            
+        while(s.hasNext()){
+            String[] tokens = s.nextLine().split(",");
+            int rate = Integer.parseInt(tokens[2]);
+            wordPairs.add(new Word(tokens[0],tokens[1],rate));
         }
-        
-        format = new Formatter();
-        format.readFromFile();
-        return true;
-        
-        
-        
-        
+            return true;
+        }catch(FileNotFoundException | NumberFormatException e){
+            return false;
+        }
     }
 
     @Override
     public boolean save() {
+        
+        this.format = new Formatter();
+        
+        this.format.saveToFile();
+        
         return true;
     }
 
