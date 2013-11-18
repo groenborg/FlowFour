@@ -4,6 +4,8 @@
  */
 package flowfour;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,10 +15,18 @@ public class Graphics extends javax.swing.JFrame {
     private final String REGEX_NUMERIC = "-?\\d+";
     private final String REGEX_SIGNS = "\\W+";
 
-    public Graphics(WordPairControlIF wpc) {
-        this.wpc = wpc;
-        wpc.load();
+    public Graphics(WordPairControlIF control) {
+        this.wpc = control;
+        this.wpc.load();
         initComponents();
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                wpc.save();
+                e.getWindow().dispose();
+            }
+        });
     }
 
     /**
@@ -152,71 +162,69 @@ public class Graphics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessButtonActionPerformed
-       if(wpc.checkGuess(answerTextField.getText(), questionTextField.getText())){
-           helpLabel.setText("You guessed the word");
-       }else{
-           String tmp = wpc.lookup(questionTextField.getText());
-           helpLabel.setText("Wrong answer. The first letter of the word is " + tmp.substring(0, 1));   
-       }
+        if (wpc.checkGuess(questionTextField.getText(), answerTextField.getText())) {
+            helpLabel.setText("You guessed the word");
+        } else {
+            String tmp = wpc.lookup(questionTextField.getText());
+            helpLabel.setText("Wrong answer. The first letter of the word is " + tmp.substring(0, 1));
+        }
     }//GEN-LAST:event_guessButtonActionPerformed
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-      questionTextField.setText(wpc.getRandomQuestion());
+        questionTextField.setText(wpc.getRandomQuestion());
     }//GEN-LAST:event_nextButtonActionPerformed
     private void lookUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookUpButtonActionPerformed
         String tmp = questionTextField.getText();
-        if(inputCheck(tmp)){
+        if (inputCheck(tmp)) {
             wpc.lookup(tmp);
-        }else{
+        } else {
             helpLabel.setText("Error");
         }
     }//GEN-LAST:event_lookUpButtonActionPerformed
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         String a = answerTextField.getText();
         String q = questionTextField.getText();
-        if(inputCheck(a) && inputCheck(q)){
-            if(!q.equalsIgnoreCase(a)){
+        if (inputCheck(a) && inputCheck(q)) {
+            if (!q.equalsIgnoreCase(a)) {
                 helpLabel.setText("check worked");
                 wpc.add(questionTextField.getText(), answerTextField.getText());
-            }else{
-            helpLabel.setText("words must differ");
+            } else {
+                helpLabel.setText("words must differ");
             }
-        }else{
+        } else {
             helpLabel.setText("no numbers or charecters accepted");
-        } 
+        }
     }//GEN-LAST:event_newButtonActionPerformed
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         String tmp = questionTextField.getText();
-        if(inputCheck(tmp)){
+        if (inputCheck(tmp)) {
             wpc.delete(tmp);
-            helpLabel.setText("Word " + tmp+" deleted");
-        }else{
+            helpLabel.setText("Word " + tmp + " deleted");
+        } else {
             helpLabel.setText("Wordpair do not exist!");
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private boolean inputCheck(String text){
+    private boolean inputCheck(String text) {
         text = text.trim();
         Pattern num = Pattern.compile(this.REGEX_NUMERIC);
         Pattern sign = Pattern.compile(this.REGEX_SIGNS);
         Matcher mnum = num.matcher(text);
         Matcher msign = sign.matcher(text);
         while (mnum.find()) {
-            if(mnum.group().length() != 0){
+            if (mnum.group().length() != 0) {
                 return false;
             }
         }
         while (msign.find()) {
-            if(msign.group().length() != 0){
+            if (msign.group().length() != 0) {
                 return false;
             }
         }
-        if(text.length() <= 0){
+        if (text.length() <= 0) {
             return false;
         }
-    return true;
+        return true;
     }
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField answerTextField;
     private javax.swing.JButton deleteButton;
